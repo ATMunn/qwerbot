@@ -1,6 +1,6 @@
 const tls = require("tls");
 const cfgfile = require("./config.js")
-const parsing = require("./parsing.js")
+const parse = require("./parsing.js")
 
 class IRCBot {
     constructor(config) {
@@ -20,7 +20,7 @@ class IRCBot {
         this.socket.once("connect",function() {
             self.socket.write("NICK "+config.nick+"\nUSER "+config.ident+" * 8 :"+config.realname+"\nNS ID "+config.password+"\n");
         });
-        this.socket.on("data", data=>parsing.parseData(data, this))
+        this.socket.on("data", data=>parse(data, this))
     }
     send(text) {
         this.socket.write(text);
