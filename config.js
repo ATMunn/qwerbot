@@ -1,6 +1,7 @@
+const rls = require("readline-sync");
+
 function askforpassword(nick) {
-    console.log("Please enter the password for the nickname "+nick+":");
-    return readline();
+    return rls.question("Please enter the password for the bot's account: ", {hideEchoBack: true})
 }
 
 let config = {
