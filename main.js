@@ -1,5 +1,6 @@
 const tls = require("tls");
 const cfgfile = require("./config.js")
+const parsing = require("./parsing.js")
 
 class IRCBot {
     constructor(config) {
@@ -15,10 +16,11 @@ class IRCBot {
     connect() {
         this.socket=tls.connect(this.port, this.host);
         let self = this; //node makes me do this for some reason
-	let config = self.config;
+	    let config = self.config;
         this.socket.once("connect",function() {
             self.socket.write("NICK "+config.nick+"\nUSER "+config.ident+" * 8 :"+config.realname+"\nNS ID "+config.password+"\n");
         });
+        this.socket.on("data", data=>parsing.parseData(data, this))
     }
     send(text) {
         this.socket.write(text);
