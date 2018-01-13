@@ -6,3 +6,4 @@ function parseData(data, bot) {
         bot.send("PONG"+parts[1]+"\n")
     }
 }
+module.exports = parseData;
