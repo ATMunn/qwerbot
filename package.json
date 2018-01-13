@@ -1,0 +1,26 @@
+{
+  "name": "qwerbot",
+  "version": "1.0.0",
+  "description": "A dumb irc bot",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ATMunnGit/qwerbot.git"
+  },
+  "keywords": [
+    "irc",
+    "bot"
+  ],
+  "author": "atmunn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ATMunnGit/qwerbot/issues"
+  },
+  "homepage": "https://github.com/ATMunnGit/qwerbot#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.7"
+  }
+}
