@@ -11,3 +11,5 @@ let config = {
     "password": pswd,
     "realname": "test bot"
 }
+
+module.exports = config;
