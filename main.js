@@ -1,5 +1,5 @@
 const tls = require("tls");
-const cfgfile = require("config")
+const cfgfile = require("config.js")
 
 class IRCBot {
     constructor(config) {
