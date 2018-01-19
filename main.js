@@ -24,6 +24,7 @@ class IRCBot {
     }
     send(text) {
         this.socket.write(text);
+        console.log("--> "+text)
     }
     msg(channel, text) {
         this.send("PRIVMSG "+channel+" :"+text)
