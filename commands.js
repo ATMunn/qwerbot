@@ -1,4 +1,4 @@
-let modules = [];
+let modules = ["general"];
 
 let commands = {};
 
