@@ -10,10 +10,10 @@ function newCommand(name, group, func, help = "No help provided.") {
     };
 }
 
-function parseCommands(bot, user, channel, command, args, raw) {
+function parseCommands(bot, msg) {
     for(let cmd in commands) {
-        if(command == cmd) {
-            commands[cmd].function(bot, user, channel, args, raw);
+        if(msg.bcmd == cmd) {
+            commands[cmd].function(bot, msg);
         }
     }
 }
