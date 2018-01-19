@@ -4,7 +4,7 @@ const commands = require("./commands.js");
 function parseData(data, bot) {
     let msg = {
         "raw": data.toString().replace(/[\r\n]*/g,""),
-        "parts": data.split(" ")
+        "parts": msg.raw.split(" ")
     };
     console.log(msg.raw); //look at my amazing logging system
     if(msg.parts[0] == "PING") {
