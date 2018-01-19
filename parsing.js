@@ -6,7 +6,7 @@ function parseData(data, bot) {
     let parts = data.split(" ");
     console.log(data); //look at my amazing logging system
     if(parts[0] == "PING") {
-        bot.send("PONG "+parts[1]+"\n");
+        bot.send("PONG "+parts[1]);
     }
     if(parts[1] == "PRIVMSG") {
         let msg = parts[3].replace(":","");

@@ -23,8 +23,8 @@ class IRCBot {
         this.socket.on("data", data=>parse(data, this));
     }
     send(text) {
-        this.socket.write(text);
-        console.log("--> "+text);
+        this.socket.write(text+"\n");
+        console.log("--> "+text.replace(/[\r\n]*/g,""));
     }
     msg(channel, text) {
         this.send("PRIVMSG "+channel+" :"+text);
@@ -33,4 +33,4 @@ class IRCBot {
 
 let bot = new IRCBot(cfgfile.botconfig);
 bot.connect();
-setTimeout(_=>bot.send("JOIN ##lazy-valoran \n"), 8000);
+setTimeout(_=>bot.send("JOIN ##lazy-valoran"), 8000);
