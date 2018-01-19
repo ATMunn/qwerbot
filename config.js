@@ -2,8 +2,7 @@ const rls = require("readline-sync");
 
 let pswd = rls.question("Please enter the password for the bot's account: ", {hideEchoBack: true})
 
-
-let config = {
+let botconfig = {
     "port": 6697,
     "host": "irc.freenode.net",
     "nick": "qwerbot",
@@ -12,4 +11,7 @@ let config = {
     "realname": "test bot"
 }
 
-module.exports = config;
+let cmdchar = "`";
+
+module.exports = {
+    botconfig, cmdchar};
