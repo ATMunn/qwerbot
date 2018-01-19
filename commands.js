@@ -3,7 +3,7 @@ let modules = ["general"];
 let commands = {};
 
 for(let mod in modules) {
-    require("./modules/"+modules[mod]+".js")
+    require("./modules/"+modules[mod]+".js")()
 }
 
 function newCommand(name, group, func, help = "No help provided.") {
