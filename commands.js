@@ -13,7 +13,7 @@ function newCommand(name, group, func, help = "No help provided.") {
 function parseCommands(bot, user, channel, command, args, raw) {
     for(let cmd in commands) {
         if(command == cmd) {
-            commands[cmd](bot, user, channel, args, raw);
+            commands[cmd].function(bot, user, channel, args, raw);
         }
     }
 }
