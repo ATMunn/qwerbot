@@ -1,9 +1,9 @@
-let modules = ["general"];
+let modul3s = ["general"]; //idk
 
 let commands = {};
 
-for(let mod in modules) {
-    require("./modules/"+modules[mod]+".js")()
+for(let mod in modul3s) {
+    require("./modules/"+modul3s[mod]+".js")()
 }
 
 function newCommand(name, group, func, help = "No help provided.") {
