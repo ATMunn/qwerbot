@@ -2,21 +2,20 @@ const cfgfile = require("./config.js");
 const commands = require("./commands.js");
 
 function parseData(data, bot) {
-    let msg = {
-        "raw": data.toString().replace(/[\r\n]*/g,""),
-        "parts": msg.raw.split(" ")
-    };
+    let msg = {"raw": data.toString().replace(/[\r\n]*/g,"")};
+    msg.parts = msg.raw.split(" ");
     console.log(msg.raw); //look at my amazing logging system
     if(msg.parts[0] == "PING") {
         bot.send("PONG "+msg.parts[1]);
     }
     else {
-        msg.user = {
-            "full": msg.parts[0].replace(/[:~]*/g,""),
-            "nick": msg.user.full.split("!")[0],
-            "user": msg.user.full.split("!")[1].split("@")[0],
-            "host": msg.user.full.split("!")[1].split("@")[1]
-        };
+
+        //yes, I know this is very messy. no, I don't care.
+
+        msg.user = {"full": msg.parts[0].replace(/[:~]*/g,"")};
+        msg.user.nick = msg.user.full.split("!")[0],
+        msg.user.ident = msg.user.full.split("!")[1].split("@")[0],
+        msg.user.hostmask = msg.user.full.split("!")[1].split("@")[1]
         msg.cmd = msg.parts[1];
         msg.args = msg.parts.slice(2);
     }
