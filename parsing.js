@@ -21,8 +21,7 @@ function parseData(data, bot) {
         bot.send("PONG "+msg.parts[1])
     }
     if(msg.cmd == "PRIVMSG") {
-        msg.channel = msg.args[1];
-        msg.privmsg = msg.args[2].replace(":","");
+        msg.channel = msg.args[0];
         msg.reply = replymsg=>bot.msg(msg.channel,msg.nick+": "+replymsg);
         if(msg.privmsg[0] == cfgfile.cmdchar) {
             msg.bcmd = msg.privmsg.split(" ").replace(cfgfile.cmdchar,"") //bcmd = bot command
