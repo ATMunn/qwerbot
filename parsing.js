@@ -23,9 +23,9 @@ function parseData(data, bot) {
     if(msg.cmd == "PRIVMSG") {
         msg.channel = msg.args[0];
         msg.reply = replymsg=>bot.msg(msg.channel,msg.nick+": "+replymsg);
-        if(msg.privmsg[0] == cfgfile.cmdchar) {
-            msg.bcmd = msg.privmsg.split(" ").replace(cfgfile.cmdchar,"") //bcmd = bot command
-            msg.cargs = msg.privmsg.split(" ").slice(1); //cargs = command args
+        if(msg.longarg[0] == cfgfile.cmdchar) {
+            msg.bcmd = msg.longarg.split(" ").replace(cfgfile.cmdchar,"") //bcmd = bot command
+            msg.cargs = msg.longarg.split(" ").slice(1); //cargs = command args
             commands.parseCommands(bot, msg);
         }
     }
