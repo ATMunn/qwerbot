@@ -24,7 +24,7 @@ function parseData(data, bot) {
         msg.channel = msg.args[0];
         msg.reply = replymsg=>bot.msg(msg.channel,msg.nick+": "+replymsg);
         if(msg.longarg[0] == cfgfile.cmdchar) {
-            msg.bcmd = msg.longarg.split(" ").replace(cfgfile.cmdchar,"") //bcmd = bot command
+            msg.bcmd = msg.longarg.split(" ")[0].replace(cfgfile.cmdchar,"") //bcmd = bot command
             msg.cargs = msg.longarg.split(" ").slice(1); //cargs = command args
             commands.parseCommands(bot, msg);
         }
