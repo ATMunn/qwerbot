@@ -5,19 +5,20 @@ function parseData(data, bot) {
     let msg = {"raw": data.toString().replace(/[\r\n]*/g,"")};
     msg.parts = msg.raw.split(" ");
     console.log(msg.raw); //look at my amazing logging system
-    if(msg.parts[0] == "PING") {
-        bot.send("PONG "+msg.parts[1]);
+    let regex = /:(~?(.+)!(.+)@(.+)) ([A-Z]+) ([^:]+) :?(.+)?/;
+    if(regex.test(msg.raw)) {
+        let matches = regex.exec(msg.raw);
+
+        msg.user = matches[1];
+        msg.user.nick = matches[2];
+        msg.user.ident = matches[3];
+        msg.user.hostmask = matches[4];
+        msg.cmd = matches[5];
+        msg.args = matches[6].split(" ");
+        msg.longarg = matches[7]
     }
-    else {
-
-        //yes, I know this is very messy. no, I don't care.
-
-        msg.user = {"full": msg.parts[0].replace(/[:~]*/g,"")};
-        msg.user.nick = msg.user.full.split("!")[0],
-        msg.user.ident = msg.user.full.split("!")[1].split("@")[0],
-        msg.user.hostmask = msg.user.full.split("!")[1].split("@")[1]
-        msg.cmd = msg.parts[1];
-        msg.args = msg.parts.slice(2);
+    else if(/PING (.+)/.test(msg.raw)) {
+        bot.send("PONG "+msg.parts[1])
     }
     if(msg.cmd == "PRIVMSG") {
         msg.channel = msg.args[1];
@@ -25,7 +26,7 @@ function parseData(data, bot) {
         msg.reply = replymsg=>bot.msg(msg.channel,msg.nick+": "+replymsg);
         if(msg.privmsg[0] == cfgfile.cmdchar) {
             msg.bcmd = msg.privmsg.split(" ").replace(cfgfile.cmdchar,"") //bcmd = bot command
-            msg.cargs = msg.privmsg.split(" ").slice(1);
+            msg.cargs = msg.privmsg.split(" ").slice(1); //cargs = command args
             commands.parseCommands(bot, msg);
         }
     }
