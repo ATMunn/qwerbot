@@ -31,3 +31,4 @@ function parseData(data, bot) {
     }
 }
 module.exports = parseData;
+
