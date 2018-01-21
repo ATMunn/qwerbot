@@ -35,7 +35,7 @@ function checkPerms(hostmask, command) {
 function parseCommands(bot, msg) {
     for(let cmd in commands) {
         if(msg.bcmd == cmd) {
-            let canExec = checkPerms(msg.hostmask, commands[cmd].permGroup)
+            let canExec = checkPerms(msg.hostmask, cmd)
             if(canExec === true) {
                 commands[cmd].function(bot, msg);
             }
