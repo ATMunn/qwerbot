@@ -1,0 +1,16 @@
+{
+    "groups": {
+        "general": "anyone",
+        "test-group": "restricted",
+        "admin-test": "admin"
+    },
+    "users": {
+        "unaffiliated/atmunn": {
+            "admin": true
+        },
+        "unaffiliated/iovoid": {
+            "admin": false,
+            "test-group": true
+        }
+    }
+}
