@@ -52,10 +52,14 @@ function parseCommands(bot, msg) {
     }
 }
 
-module.exports = {parseCommands, newCommand};
-
-// import the other modules
-
-for (var mod in modul3s) {
-    require("./modules/"+modul3s[mod]+".js");
+function reload() {
+    commands = {};
+    require.cache = {};
+    for (var mod in modul3s) {
+        require("./modules/"+modul3s[mod]+".js");
+    }
 }
+
+module.exports = {parseCommands, newCommand, reload};
+
+reload();
