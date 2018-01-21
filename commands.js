@@ -15,12 +15,12 @@ function newCommand(name, group, permGroup, func, help = "No help provided.") {
 
 function checkPerms(hostmask, command) {
     let permGroup = commands[command].permGroup;
-    let permissions = jf.readFileSync("./permissions.json");
-    if(permissions.users[hostmask].admin || permissions.groups[permGroup] === "anyone") {
+    let perms = jf.readFileSync("./perms.json");
+    if((perms.users[hostmask] && perms.users[hostmask].admin) || perms.groups[permGroup] === "anyone") {
         return true;
     }
-    else if(permissions.groups[permGroup] === "restricted") {
-        if (permissions.users[hostmask][permGroup]) {
+    else if(perms.groups[permGroup] === "restricted") {
+        if (perms.users[hostmask] && perms.users[hostmask][permGroup]) {
             return true;
         }
         else {
