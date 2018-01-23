@@ -54,7 +54,7 @@ function parseCommands(bot, msg) {
 
 function reload() {
     commands = {};
-    require.cache = {};
+    delete require.cache;
     for (var mod in modul3s) {
         require("./modules/"+modul3s[mod]+".js");
     }
