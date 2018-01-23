@@ -1,8 +1,11 @@
 const jf = require("jsonfile");
 
 let modul3s = ["general"]; //idk
+var loaded_modules = [];
 
 let commands = {};
+
+module.exports = {parseCommands, newCommand, reload};
 
 function newCommand(name, group, permGroup, func, help = "No help provided.") {
     commands[name] = {
@@ -54,12 +57,18 @@ function parseCommands(bot, msg) {
 
 function reload() {
     commands = {};
+    if (loaded_modules.length > 0) {
+        for (var mod in loaded_modules) {
+            try {
+                mod.exit();
+            } catch (e) {}
+        }
+        loaded_modules = [];
+    }
     for (var mod in modul3s) {
         delete require.cache["./modules/"+modul3s[mod]+".js"];
-        require("./modules/"+modul3s[mod]+".js");
+        loaded_modules.push(require("./modules/"+modul3s[mod]+".js").init(module.exports));
     }
 }
-
-module.exports = {parseCommands, newCommand, reload};
 
 reload();
