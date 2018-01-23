@@ -1,3 +1,5 @@
+module.exports = {init, exit};
+
 function init(commands) {
     console.log("hiya");
 
@@ -10,11 +12,9 @@ function init(commands) {
         msg.reply("Reloaded modules.");
     }, "Reloads the bot's modules.");
 
-    return this;
+    return module.exports;
 }
 
 function exit() {
     console.log("cleanup time!");
 }
-
-module.exports = {init, exit};
