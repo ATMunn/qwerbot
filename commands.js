@@ -5,7 +5,9 @@ var loaded_modules = [];
 
 let commands = {};
 
-module.exports = {parseCommands, newCommand, reload};
+let groups = {};
+
+module.exports = {parseCommands, newCommand, reload, listGroups, listCmdsInGroup, getCmdHelp};
 
 function newCommand(name, group, permGroup, func, help = "No help provided.") {
     commands[name] = {
@@ -14,6 +16,22 @@ function newCommand(name, group, permGroup, func, help = "No help provided.") {
         "function": func,
         "help": help,
     };
+    if (!groups[group]) {
+        groups[group] = [];
+    }
+    groups[group].push(name)
+}
+
+function listGroups() {
+    return Object.keys(groups);
+}
+
+function listCmdsInGroup(group) {
+    return !!groups[group]?groups[group]:false;
+}
+
+function getCmdHelp(cmd) {
+    return !!commands[cmd]?commands[cmd].help:false; //ternary ftw
 }
 
 function checkPerms(hostmask, command) {

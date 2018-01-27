@@ -29,8 +29,15 @@ class IRCBot {
     msg(channel, text) {
         this.send("PRIVMSG "+channel+" :"+text);
     }
+    join(channel) {
+        this.send("JOIN "+channel)
+    }
 }
 
 let bot = new IRCBot(cfgfile.botconfig);
 bot.connect();
-setTimeout(_=>bot.send("JOIN ##lazy-valoran"), 8000);
+setTimeout(_=>{
+    for(let i=0;i<=cfgfile.autojoin.length;i++) {
+        bot.join(cfgfile.autojoin[i])
+    }
+}, 8000);
