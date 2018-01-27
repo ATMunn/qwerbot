@@ -3,9 +3,9 @@ const jf = require("jsonfile");
 let modul3s = ["general"]; //idk
 var loaded_modules = [];
 
-let commands = {};
+let commands = Object.create(null);
 
-let groups = {};
+let groups = Object.create(null);
 
 module.exports = {parseCommands, newCommand, reload, listGroups, listCmdsInGroup, getCmdHelp};
 

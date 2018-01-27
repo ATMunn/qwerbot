@@ -29,7 +29,7 @@ function init(commands) {
             msg.reply("List of all groups: "+commands.listGroups().join(", ")+" (For a list of commands in a specific group, use 'list [group]')");
         else {
             let cmds = commands.listCmdsInGroup(msg.cargs[0]);
-            if(cmds && typeof cmds == "object")
+            if(cmds)
                 msg.reply("List of commands in group \""+msg.cargs[0]+"\": "+cmds.join(", "));
             else
                 msg.reply("That group does not seem to exist. :(");
