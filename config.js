@@ -13,4 +13,6 @@ let botconfig = {
 
 let cmdchar = "`";
 
-module.exports = {botconfig, cmdchar};
+let autojoin = ["##lazy-valoran"]
+
+module.exports = {botconfig, cmdchar,autojoin};
