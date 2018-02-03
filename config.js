@@ -1,6 +1,6 @@
-const rls = require("readline-sync");
+const fs = require("fs");
 
-let pswd = rls.question("Please enter the password for the bot's account: ", {hideEchoBack: true});
+let pswd = fs.readFileSync("password.txt");
 
 let botconfig = {
     "port": 6697,
