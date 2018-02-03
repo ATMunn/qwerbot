@@ -1,1 +1,1 @@
-while true;do;node main.js;done;
+while true;do node main.js;done;
