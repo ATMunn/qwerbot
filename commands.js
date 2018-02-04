@@ -75,6 +75,7 @@ function parseCommands(bot, msg) {
 
 function reload() {
     commands = {};
+    groups = {};
     if (loaded_modules.length > 0) {
         for (var mod in loaded_modules) {
             try {
@@ -84,7 +85,7 @@ function reload() {
         loaded_modules = [];
     }
     for (var mod in modul3s) {
-        delete require.cache["./modules/"+modul3s[mod]+".js"];
+        delete require.cache[require.resolve("./modules/"+modul3s[mod]+".js")];
         loaded_modules.push(require("./modules/"+modul3s[mod]+".js").init(module.exports));
     }
 }
