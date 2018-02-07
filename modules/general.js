@@ -45,12 +45,12 @@ function init(commands) {
     }, "Restarts the bot. Usage: 'restart [reason]'");
 
     commands.newCommand("update", "general", "general-admin", (bot,msg)=> {
-        let reply = cp.execSync("git pull").toString;
-        if(reply === "Already up-to-date.") 
-            msg.reply("Already up to date.")
+        let reply = cp.execSync("git pull").toString();
+        if(reply.startsWith("Already up-to-date.")) 
+            msg.reply("Already up to date.");
         else
-            msg.reply("Pulled latest commit from git")
-    })
+            msg.reply("Pulled latest commit from git");
+    }, "Runs 'git pull'.");
 
     return module.exports;
 }
