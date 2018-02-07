@@ -37,9 +37,10 @@ function init(commands) {
     }, "Lists all commands in a specific group, or lists all groups if none is specified. Usage: 'list [group]'");
 
     commands.newCommand("restart", "general", "general-admin", (bot,msg)=> {
-        bot.send("QUIT :Restarted by "+msg.nick+": \""+msg.cargs[0]+"\"")
-        process.exit(0) //lazy restart, in order to make it work, the bot needs to be run by a wrapper that auto-restarts
-    })
+        let reason = msg.cargs[0]?msg.cargs[0]:"No reason provided";
+        bot.send("QUIT :Restarted by "+msg.nick+": \""+reason+"\"");
+        process.exit(0); //lazy restart, in order to make it work, the bot needs to be run by a wrapper that auto-restarts
+    }, "Restarts the bot. Usage: 'restart [reason]'");
 
     return module.exports;
 }

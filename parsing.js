@@ -4,7 +4,7 @@ const commands = require("./commands.js");
 function parseData(data, bot) {
     let msg = {"raw": data.toString().replace(/[\r\n]*/g,"")};
     msg.parts = msg.raw.split(" ");
-    console.log(msg.raw); //look at my amazing logging system
+    console.log("[RECV] "+msg.raw); //look at my amazing logging system
     let regex = /:(~?(.+)!(.+)@(.+)) ([A-Z]+) ([^:]+) :?(.+)?/;
     if(regex.test(msg.raw)) {
         let matches = regex.exec(msg.raw);

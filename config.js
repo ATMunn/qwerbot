@@ -13,6 +13,6 @@ let botconfig = {
 
 let cmdchar = "`";
 
-let autojoin = ["##lazy-valoran"]
+let autojoin = ["##lazy-valoran", "##atmunn"]
 
 module.exports = {botconfig, cmdchar,autojoin};
