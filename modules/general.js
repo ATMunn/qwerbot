@@ -1,3 +1,5 @@
+const cp = require("child_process");
+
 module.exports = {init, exit};
 
 function init(commands) {
@@ -41,6 +43,14 @@ function init(commands) {
         bot.send("QUIT :Restarted by "+msg.nick+": \""+reason+"\"");
         process.exit(0); //lazy restart, in order to make it work, the bot needs to be run by a wrapper that auto-restarts
     }, "Restarts the bot. Usage: 'restart [reason]'");
+
+    commands.newCommand("update", "general", "general-admin", (bot,msg)=> {
+        let reply = cp.execSync("git pull").toString;
+        if(reply === "Already up-to-date.") 
+            msg.reply("Already up to date.")
+        else
+            msg.reply("Pulled latest commit from git")
+    })
 
     return module.exports;
 }
