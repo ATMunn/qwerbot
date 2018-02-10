@@ -1,6 +1,6 @@
 const jf = require("jsonfile");
 
-let modul3s = ["general"]; //idk
+let modul3s = ["general", "irc"]; //idk
 var loaded_modules = [];
 
 let commands = Object.create(null);

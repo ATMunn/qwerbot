@@ -1,7 +1,9 @@
 {
     "groups": {
         "general": "anyone",
-        "general-admin": "admin"
+        "general-admin": "admin",
+        "chanop": "restricted",
+        "control": "restricted"
     },
     "users": {
         "unaffiliated/atmunn": {
