@@ -11,7 +11,7 @@ let botconfig = {
     "realname": "test bot"
 };
 
-let cmdchar = "`";
+let cmdchar = "^";
 
 let autojoin = ["##lazy-valoran", "##atmunn"]
 
