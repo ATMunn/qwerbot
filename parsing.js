@@ -5,9 +5,10 @@ function parseData(data, bot) {
     let msg = {"raw": data.toString().replace(/[\r\n]*/g,"")};
     msg.parts = msg.raw.split(" ");
     console.log("[RECV] "+msg.raw); //look at my amazing logging system
-    let regex = /:(~?(.+)!(.+)@(.+)) ([A-Z]+) ([^:]+) :?(.+)?/;
+    let regex = /^:(~?(\S+)!(\S+)@(\S+)) ([A-Z]+) ([^:]+) :?(.+)?$/;
+    let matches = regex.exec(msg.raw);
     if(regex.test(msg.raw)) {
-        let matches = regex.exec(msg.raw);
+        //let matches = regex.exec(msg.raw);
 
         msg.user = matches[1];
         msg.nick = matches[2];
