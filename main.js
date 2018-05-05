@@ -17,8 +17,10 @@ class IRCBot {
         this.socket=tls.connect(this.port, this.host);
         let self = this; //node makes me do this for some reason
 	    let config = self.config;
-        this.socket.once("connect",function() {
-            self.socket.write("NICK "+config.nick+"\nUSER "+config.ident+" * 8 :"+config.realname+"\nNS ID "+config.password+"\n");
+        this.socket.once("connect",() => {
+            self.socket.write(`NICK ${config.nick}\r\n`);
+            self.socket.write(`USER ${config.ident} * 8 :${config.realname}\r\n`);
+            self.socket.write(`NS ID ${config.password}\r\n`);
         });
         this.socket.on("data", data=>parse(data, this));
         this.msgQueue = [];
@@ -32,8 +34,8 @@ class IRCBot {
                 for(let i=0; i <= sendCount; i++) {
                     let text = this.msgQueue.shift();
                     if(typeof text == "string") { //idk what causes it to not be, but node complains
-                        this.socket.write(text+"\n");
-                        console.log("[SEND] "+text.replace(/[\r\n]*/g,""));
+                        this.socket.write(`${text}\r\n`);
+                        console.log(`[SEND] ${text.replace(/[\r\n]*/g,"")}`);
                         this.canBurst = false;
                     }
                 }
@@ -41,8 +43,8 @@ class IRCBot {
             else {
                 let text = this.msgQueue.shift();
                 if(typeof text == "string") { //idk what causes it to not be, but node complains
-                    this.socket.write(text+"\n");
-                    console.log("[SEND] "+text.replace(/[\r\n]*/g,""));
+                    this.socket.write(`${text}\r\n`);
+                    console.log(`[SEND] ${text.replace(/[\r\n]*/g,"")}`);
                     this.canBurst = false;
                 }
             }
@@ -52,24 +54,24 @@ class IRCBot {
         this.msgQueue.push(text);
     }
     msg(channel, text) {
-        if(text.indexOf("\n") == -1){
-            this.send("PRIVMSG "+channel+" :"+text);
+        if(!text.includes("\r\n")){
+            this.send(`PRIVMSG ${channel} :${text}`);
         }
         else {
-            let msgs = text.split("\n");
+            let msgs = text.split("\r\n");
             for(let i=0;i<msgs.length;i++) {
-                this.send("PRIVMSG "+channel+" :"+msgs[i]);
+                this.send(`PRIVMSG ${channel} :${msgs[i]}`);
             }
         }
     }
     join(channel) {
-        this.send("JOIN "+channel);
+        this.send(`JOIN ${channel}`);
     }
     part(channel) {
-        this.send("JOIN "+channel);
+        this.send(`JOIN ${channel}`);
     }
     mode(channel, mode, nick) {
-        this.send("MODE "+channel+" "+mode+typeof nick == "undefined"?"":(" "+nick))
+        this.send(`MODE ${channel} ${mode} ${typeof nick == "undefined" ? "" : nick}`)
     }
 }
 

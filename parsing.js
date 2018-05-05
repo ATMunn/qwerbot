@@ -4,7 +4,7 @@ const commands = require("./commands.js");
 function parseData(data, bot) {
     let msg = {"raw": data.toString().replace(/[\r\n]*/g,"")};
     msg.parts = msg.raw.split(" ");
-    console.log("[RECV] "+msg.raw); //look at my amazing logging system
+    console.log(`[RECV] ${msg.raw}`); //look at my amazing logging system
     let regex = /^:(~?(\S+)!(\S+)@(\S+)) ([A-Z]+) ([^:]+) :?(.+)?$/;
     let matches = regex.exec(msg.raw);
     if(regex.test(msg.raw)) {
@@ -19,11 +19,11 @@ function parseData(data, bot) {
         msg.longarg = matches[7]
     }
     else if(/PING (.+)/.test(msg.raw)) {
-        bot.send("PONG "+msg.parts[1])
+        bot.send(`PONG ${msg.parts[1]}`)
     }
     if(msg.cmd == "PRIVMSG") {
         msg.channel = msg.args[0];
-        msg.reply = replymsg=>bot.msg(msg.channel,msg.nick+": "+replymsg);
+        msg.reply = replymsg=>bot.msg(msg.channel,`${msg.nick}: ${replymsg}`);
         if(msg.longarg[0] == cfgfile.cmdchar) {
             msg.bcmd = msg.longarg.split(" ")[0].replace(cfgfile.cmdchar,"") //bcmd = bot command
             msg.cargs = msg.longarg.split(" ").slice(1); //cargs = command args
