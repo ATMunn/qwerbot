@@ -65,6 +65,12 @@ class IRCBot {
     join(channel) {
         this.send("JOIN "+channel);
     }
+    part(channel) {
+        this.send("JOIN "+channel);
+    }
+    mode(channel, mode, nick) {
+        this.send("MODE "+channel+" "+mode+typeof nick == "undefined"?"":(" "+nick))
+    }
 }
 
 let bot = new IRCBot(cfgfile.botconfig);
