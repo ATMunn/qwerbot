@@ -20,7 +20,7 @@ function init(commands) {
         else {
             let help = commands.getCmdHelp(msg.cargs[0]);
             if(help)
-                msg.reply("Help for \""+msg.cargs[0]+"\": "+help);
+                msg.reply(`Help for "${msg.cargs[0]}": ${help}`);
             else
                 msg.reply("That command does not seem to exist. :(");
         }
@@ -28,19 +28,19 @@ function init(commands) {
 
     commands.newCommand("list", "general", "general", (bot,msg)=>{
         if(msg.cargs.length == 0)
-            msg.reply("List of all groups: "+commands.listGroups().join(", ")+" (For a list of commands in a specific group, use 'list [group]')");
+            msg.reply(`List of all groups: ${commands.listGroups().join(", ")} (For a list of commands in a specific group, use 'list [group]')`);
         else {
             let cmds = commands.listCmdsInGroup(msg.cargs[0]);
             if(cmds)
-                msg.reply("List of commands in group \""+msg.cargs[0]+"\": "+cmds.join(", "));
+                msg.reply(`List of commands in group "${msg.cargs[0]}": ${cmds.join(", ")}`);
             else
                 msg.reply("That group does not seem to exist. :(");
         }
     }, "Lists all commands in a specific group, or lists all groups if none is specified. Usage: 'list [group]'");
 
-    commands.newCommand("restart", "general", "general-admin", (bot,msg)=> {
-        let reason = msg.cargs[0]?msg.cargs[0]:"No reason provided";
-        bot.send("QUIT :Restarted by "+msg.nick+": \""+reason+"\"");
+    commands.newCommand("restart", "general", "general-admin", (bot, {cargs, nick}) => {
+        let reason = cargs[0]?cargs[0]:"No reason provided";
+        bot.send(`QUIT :Restarted by ${nick}: "${reason}"`);
         process.exit(0); //lazy restart, in order to make it work, the bot needs to be run by a wrapper that auto-restarts
     }, "Restarts the bot. Usage: 'restart [reason]'");
 
