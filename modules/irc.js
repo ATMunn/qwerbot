@@ -39,41 +39,25 @@ function init(commands) {
         }
     }, "Makes the bot part a channel. Usage: 'part <channel'")
 
-    commands.newCommand("op", "irc", "control", (bot,msg)=>{
-        if(msg.cargs.length != 0) {
-            bot.mode(msg.cargs.length > 1?msg.cargs[1]:msg.channel, "+o", msg.cargs[0]);
-        }
-        else{
-            msg.reply("Please specify a nick.")
-        }
-    }, "Ops a user in a channel, or the current channel if none is specified. Usage: 'op <user> [channel]'")
+    commands.newCommand("op", "chanop", "control", (bot,msg)=>{
+        let nick = (msg.cargs.length > 0?msg.cargs[0]:msg.nick);
+        bot.mode((msg.cargs.length > 1?msg.cargs[1]:msg.channel), "+o", nick);
+    }, "Ops a user in a channel, or the current channel if none is specified. User defaults to the one running the command. Usage: 'op [user] [channel]'")
 
-    commands.newCommand("deop", "irc", "control", (bot,msg)=>{
-        if(msg.cargs.length != 0) {
-            bot.mode(msg.cargs.length > 1?msg.cargs[1]:msg.channel, "-o", msg.cargs[0]);
-        }
-        else{
-            msg.reply("Please specify a nick.")
-        }
-    }, "Deops a user in a channel, or the current channel if none is specified. Usage: 'deop <user> [channel]'")
+    commands.newCommand("deop", "chanop", "control", (bot,msg)=>{
+        let nick = (msg.cargs.length > 0?msg.cargs[0]:msg.nick);
+        bot.mode((msg.cargs.length > 1?msg.cargs[1]:msg.channel), "-o", nick);
+    }, "Deops a user in a channel, or the current channel if none is specified. User defaults to the one running the command. Usage: 'deop [user] [channel]'")
 
-    commands.newCommand("voice", "irc", "control", (bot,msg)=>{
-        if(msg.cargs.length != 0) {
-            bot.mode(msg.cargs.length > 1?msg.cargs[1]:msg.channel, "+v", msg.cargs[0]);
-        }
-        else{
-            msg.reply("Please specify a nick.")
-        }
-    }, "Voices a user in a channel, or the current channel if none is specified. Usage: 'voice <user> [channel]'")
+    commands.newCommand("voice", "chanop", "control", (bot,msg)=>{
+        let nick = (msg.cargs.length > 0?msg.cargs[0]:msg.nick);
+        bot.mode((msg.cargs.length > 1?msg.cargs[1]:msg.channel), "+v", nick);
+    }, "Voices a user in a channel, or the current channel if none is specified. User defaults to the one running the command. Usage: 'voice [user] [channel]'")
 
-    commands.newCommand("unvoice", "irc", "control", (bot,msg)=>{
-        if(msg.cargs.length != 0) {
-            bot.mode(msg.cargs.length > 1?msg.cargs[1]:msg.channel, "-v", msg.cargs[0]);
-        }
-        else{
-            msg.reply("Please specify a nick.")
-        }
-    }, "Unvoices a user in a channel, or the current channel if none is specified. Usage: 'unvoice <user> [channel]'")
+    commands.newCommand("unvoice", "chanop", "control", (bot,msg)=>{
+        let nick = (msg.cargs.length > 0?msg.cargs[0]:msg.nick);
+        bot.mode((msg.cargs.length > 1?msg.cargs[1]:msg.channel), "-v", nick);
+    }, "Unvoices a user in a channel, or the current channel if none is specified. User defaults to the one running the command. Usage: 'unvoice [user] [channel]'")
     return module.exports;
 }
 
