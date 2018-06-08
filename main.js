@@ -73,6 +73,9 @@ class IRCBot {
     mode(channel, mode, nick) {
         this.send(`MODE ${channel} ${mode} ${typeof nick == "undefined" ? "" : nick}`)
     }
+    action(channel, text) {
+        this.msg(channel, `\u0001ACTION ${text}\u0001`)
+    }
 }
 
 let bot = new IRCBot(cfgfile.botconfig);
