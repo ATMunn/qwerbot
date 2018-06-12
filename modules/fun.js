@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -37,9 +39,14 @@ function init(commands) {
             msg.reply(pickRandom(msg.cargs));
         }
         else {
-            msg.reply("Please specify a list of choices.")
+            msg.reply("Please specify a list of choices.");
         }
-    }, "Returns a random choice out of a list of space-separated choices. Usage: 'randpick <choices>'")
+    }, "Returns a random choice out of a list of space-separated choices. Usage: 'randpick <choices>'");
+
+    commands.newCommand("attack", "fun", "fun", (bot,msg)=>{
+        victim = (msg.cargs.length == 0?msg.nick:msg.cargs.join(" "));
+        bot.action(msg.channel, pickRandom(JSON.parse(fs.readFileSync("./responses.json")).attacks));
+    }, "Attacks a selected victim. Usage: 'attack [victim]'");
 
     return module.exports;
 }

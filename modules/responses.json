@@ -1,0 +1,11 @@
+{
+	"attacks": [
+		"pours a bucket of lava on ${victim}'s head",
+        "drops a wrecking ball on ${victim}",
+        "sends ${victim} to the gulags",
+        "forces ${victim} to write PHP code",
+        "sends ${victim} to Uranus and leaves them there",
+        "puts ${victim} in an American public school",
+        "crosses the hammer and sickle while facing ${victim}"
+	]
+}
