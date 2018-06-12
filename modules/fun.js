@@ -4,6 +4,10 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function pickRandom(choices) {
+    return choices[getRandomInt(0, choices.length)]
+}
+
 module.exports = {init, exit};
 
 function init(commands) {
@@ -26,7 +30,16 @@ function init(commands) {
             msg.reply("Please specify both a minimum and maximum number.");
         }
 
-    }, "Returns a random integer within a range. Usage: rand <min> <max>");
+    }, "Returns a random integer within a range. Usage: 'rand <min> <max>'");
+
+    commands.newCommand("randpick", "fun", "fun", (bot,msg)=>{
+        if (msg.cargs.length != 0) {
+            msg.reply(pickRandom(msg.cargs));
+        }
+        else {
+            msg.reply("Please specify a list of choices.")
+        }
+    }, "Returns a random choice out of a list of space-separated choices. Usage: 'randpick <choices>'")
 
     return module.exports;
 }
