@@ -45,7 +45,7 @@ function init(commands) {
 
     commands.newCommand("attack", "fun", "fun", (bot,msg)=>{
         victim = (msg.cargs.length == 0?msg.nick:msg.cargs.join(" "));
-        bot.action(msg.channel, pickRandom(JSON.parse(fs.readFileSync("./responses.json")).attacks));
+        bot.action(msg.channel, pickRandom(JSON.parse(fs.readFileSync("responses.json")).attacks));
     }, "Attacks a selected victim. Usage: 'attack [victim]'");
 
     return module.exports;
