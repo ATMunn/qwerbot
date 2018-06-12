@@ -3,7 +3,8 @@
         "general": "anyone",
         "general-admin": "admin",
         "chanop": "restricted",
-        "control": "restricted"
+        "control": "restricted",
+        "fun": "anyone"
     },
     "users": {
         "unaffiliated/atmunn": {
