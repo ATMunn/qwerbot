@@ -1,0 +1,18 @@
+const fs = require("fs");
+
+let pswd = fs.readFileSync("password.txt");
+
+let botconfig = {
+    "port": 6697,
+    "host": "irc.freenode.net",
+    "nick": "MyBotNick",
+    "ident": "bot",
+    "password": pswd,
+    "realname": ""
+};
+
+let cmdchar = "^";
+
+let autojoin = ["##mybotchannel"]
+
+module.exports = {botconfig, cmdchar,autojoin};

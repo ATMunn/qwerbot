@@ -10,6 +10,30 @@ function pickRandom(choices) {
     return choices[getRandomInt(0, choices.length)]
 }
 
+let generateTemplateString = (function() {
+    let cache = {};
+
+    function generateTemplate(template){
+        let fn = cache[template];
+
+        if (!fn) {  
+            // Replace ${expressions} (etc) with ${map.expressions}
+            let sanitized = template
+                .replace(/\$\{([\s]*[^;\s\{]+[\s]*)\}/g, function(_, match){
+                    return `\$\{map.${match.trim()}\}`;
+                    })
+                // Afterwards, replace anything that's not ${map.expressions}' (etc) with a blank string.
+                .replace(/(\$\{(?!map\.)[^}]+\})/g, '');
+            
+            fn = Function('map', `return \`${sanitized}\``);
+        }
+
+    return fn;
+    };
+
+    return generateTemplate;
+})(); //Thank you very much to Bryan Rayner for this function code.
+
 module.exports = {init, exit};
 
 function init(commands) {
@@ -44,8 +68,9 @@ function init(commands) {
     }, "Returns a random choice out of a list of space-separated choices. Usage: 'randpick <choices>'");
 
     commands.newCommand("attack", "fun", "fun", (bot,msg)=>{
-        victim = (msg.cargs.length == 0?msg.nick:msg.cargs.join(" "));
-        bot.action(msg.channel, pickRandom(JSON.parse(fs.readFileSync("./responses.json", "utf-8")).attacks));
+        let victim = (msg.cargs.length == 0?msg.nick:msg.cargs.join(" "));
+        let message = generateTemplateString(pickRandom(JSON.parse(fs.readFileSync("modules/responses.json", "utf-8")).attacks));
+        bot.action(msg.channel, message({victim: victim}));
     }, "Attacks a selected victim. Usage: 'attack [victim]'");
 
     return module.exports;
