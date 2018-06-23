@@ -6,6 +6,14 @@
         "forces ${victim} to write PHP code",
         "sends ${victim} to Uranus and leaves them there",
         "puts ${victim} in an American public school",
-        "crosses the hammer and sickle while facing ${victim}"
+        "crosses the hammer and sickle while facing ${victim}",
+        "bandwagons ${victim}",
+        "gives ${victim} a totem of death",
+        "causes the earth to open up under ${victim}",
+        "tosses ${victim} off the Burj Khalifa",
+        "tosses ${victim} into a volcano for SCIENCE",
+        "makes North Korea declare war on ${victim}",
+        "exiles ${victim} to St. Helena",
+        "sends ${victim} back 1000 years"
 	]
 }
