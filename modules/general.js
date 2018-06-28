@@ -52,6 +52,21 @@ function init(commands) {
             msg.reply("Pulled latest commit from git");
     }, "Runs 'git pull'.");
 
+    commands.newCommand("in", "general", "general-admin", (bot,msg)=> {
+        if(msg.cargs.length >= 2) {
+            msg.channel = msg.cargs[0];
+            msg.bcmd = msg.cargs[1];
+            if(msg.cargs.length > 2) {
+                msg.cargs = msg.cargs.slice(2)
+            }
+            console.log(msg)
+            commands.parseCommands(bot, msg)
+        }
+        else {
+            msg.reply("Please specify a channel and a command.")
+        }
+    }, "Executes a command in a different channel. Usage: 'in <channel> <command> [command arguments]'");
+
     return module.exports;
 }
 

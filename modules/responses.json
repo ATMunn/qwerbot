@@ -14,6 +14,8 @@
         "tosses ${victim} into a volcano for SCIENCE",
         "makes North Korea declare war on ${victim}",
         "exiles ${victim} to St. Helena",
-        "sends ${victim} back 1000 years"
+        "sends ${victim} back 1000 years",
+        "runs 'universe.${victim} = undefined;'",
+        "compresses ${victim} into a black hole"
 	]
 }
